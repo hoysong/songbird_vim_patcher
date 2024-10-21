@@ -1,0 +1,54 @@
+if has("systax")
+    syntax on
+endif
+set autoindent
+set cindent
+set smartindent
+set ts=4
+set shiftwidth=4
+set hlsearch
+set nu
+set cursorline
+
+set list lcs=tab:\ \ │
+set relativenumber
+" Enable copy to clipboard
+set clipboard=unnamed
+
+" === 터미널 관련 설정 (필요 여부에 따라 주석설정.) ===
+"set termwinsize=10x210 " vim 안에서 ':term' 명령을 통해 생성된 터미널의 크기입니다. (수직)x(수평)
+"autocmd VimEnter * below term  
+"autocmd VimEnter * wincmd k " 생성된 터미널에 있는 커서를 편집중인 파일로 이동합니다.
+
+set omnifunc=syntaxcomplete#Complete
+filetype plugin indent on    " required
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim " set the runtime path to include Vundle and initialize
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim' "let Vundle manage Vundle, required
+" add airline design
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdtree' "FileTreePlugin. :NERDTreeToggle로 on off가능
+Plugin 'scrooloose/syntastic' "코드 문법체크 플러그인
+
+" 컬러스키마
+Plugin 'morhetz/gruvbox'
+Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'lifepillar/vim-solarized8'
+" Plugin 'nathanaelkane/vim-indent-guides' " 인던트 라인
+call vundle#end()            " required
+" vimplug_init
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+" cocnvim의 vim 버전 차이로 인한 에러 출력을 없애줍니다.
+let g:coc_disable_startup_warning = 1
