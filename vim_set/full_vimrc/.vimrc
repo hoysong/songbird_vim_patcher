@@ -79,21 +79,21 @@ endif
 "        gruvbox setting
 "        quote below if you don't need.
 "=================================================
-"colorscheme gruvbox
-"
-"set background=dark
-"let g:gruvbox_contrast_dark='soft'
+colorscheme gruvbox
+
+set background=dark
+let g:gruvbox_contrast_dark='soft'
 
 "=================================================
 "        dracula setting
 "        quote below if you don't need.
 "=================================================
-if v:version < 802
-    packadd! dracula
-endif
-syntax enable
-colorscheme dracula
-
+"if v:version < 802
+"    packadd! dracula
+"endif
+"syntax enable
+"colorscheme dracula
+"
 "=================================================
 "        solarized8 setting
 "        quote below if you don't need.
