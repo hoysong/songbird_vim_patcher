@@ -60,7 +60,4 @@ sleep 1
 gnome-terminal -- vim +"CocInstall coc-clangd"
 sleep 8
 gnome-terminal -- vim patch.c +"sleep 5" +"CocCommand clangd.install"
-echo "don't panic. new terminal will be open."
-echo "Wait until 'starting coc.vim service' in 'patch.c'vim terminal."
-echo "when it appear, all setup is done."
-echo "open new terminal and enjoy your new vim."
+bash last_msg.sh
