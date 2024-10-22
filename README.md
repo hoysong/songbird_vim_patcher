@@ -1,5 +1,5 @@
 # 도움받은 레포지토리 및 자료
-현재 vim 플러그인 관련 자료만 업데이트되어 있습니다.
+현재 vim 플러그인 자동설치만 있습니다.
 + [cocnvim](https://github.com/neoclide/coc.nvim)
 + [NERDtree](https://github.com/preservim/nerdtree)
 + [syntastic](https://github.com/vim-syntastic/syntastic)
