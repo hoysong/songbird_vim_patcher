@@ -61,3 +61,4 @@ gnome-terminal -- vim +"CocInstall coc-clangd"
 sleep 8
 gnome-terminal -- vim patch.c +"sleep 5" +"CocCommand clangd.install"
 bash last_msg.sh
+cp ./coc-settings.json ~/.vim/ 
