@@ -34,7 +34,7 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 
 # how to install
 + bash patch.sh 를 통해 스크립트를 실행합니다.
-+ 새로운 터미널들을 열릴 것이지만 당황하지 마세요.
++ 새로운 터미널들이 열릴 것이지만 당황하지 마세요.
 + 스크립트의 안내메시지를 따라서 '설치가 완료되면' 종료하도록 합니다.
 
 # 간단 사용법
