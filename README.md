@@ -38,7 +38,7 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 + 스크립트의 안내메시지를 따라서 '설치가 완료되면' 종료하도록 합니다.
 
 # 간단 사용법
-0. colorscheme를 변경하고 싶다면 ~/.vimrc파일을 확인하세요.
+0. colorscheme를 변경하고 싶다면 ~/.vimrc파일을 확인하세요. 주석처리를 하거나 제거하여 colorscheme를 변경 가능합니다.
 
 2. NerdTree (기본 활성화 상태)
 ':NERDTree'를 입력하여 파일트리를 활성화합니다.
