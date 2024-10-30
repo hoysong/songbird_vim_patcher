@@ -37,6 +37,10 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 + 새로운 터미널들이 열릴 것이지만 당황하지 마세요.
 + 스크립트의 안내메시지를 따라서 '설치가 완료되면' 종료하도록 합니다.
 
++ 현재 옵시디언 desktop entry가 제대로 작동하지 않고 있습니다..
+앱 서랍에 등록되어도 앱서랍을 통해 실행하는 경우 실행이 잘 되지 않고 있습니다.
+만약 바로 사용을 해야한다면 ~/obsidian/ 디렉토리의 appimg를 수동으로 실행하세요.
+
 # 간단 사용법
 0. colorscheme를 변경하고 싶다면 ~/.vimrc파일을 확인하세요. 주석처리를 하거나 제거하여 colorscheme를 변경 가능합니다.
 
