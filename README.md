@@ -1,3 +1,5 @@
+![vim](https://github.com/user-attachments/assets/62b62f6e-6e4a-410b-a075-3223c27a8fa7)
+
 # 도움받은 레포지토리 및 자료
 현재 vim 플러그인 자동설치만 있습니다.
 + [cocnvim](https://github.com/neoclide/coc.nvim)
