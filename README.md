@@ -21,6 +21,8 @@
 + cocnvim을 통해 vscode의 함수추천기능 사용.
 + include한 헤더로부터의 함수들도 추적합니다.
 + 간단한 문법검사.
++ 기본적으로 language sever 패치는 Clang만 되어있는 상태입니다. 다른 언어를 설치하고 싶다면 cocnvim language server를 참조해 주세요.
++ C언어는 vim 명령에서 CocInstall coc-clangd, CocCommand clangd.install명령으로 설치되었습니다.
 
 1. patch.sh will 'rm ~/.vimrc'.
 patch.sh는 'rm ~/.vimrc'를 할것입니다.
