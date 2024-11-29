@@ -7,7 +7,7 @@ set smartindent
 set ts=4
 set shiftwidth=4
 set hlsearch
-set nu
+" set nu
 set cursorline
 
 set list lcs=tab:\ \ │
