@@ -12,7 +12,7 @@ if ! docker container ls | grep -q cluster-tools; then
 fi
 
 
-prefix="/root/home/${PWD#$HOME}"
+prefix="/root/.host_root/${PWD#/}"
 new_args=()
 
 for arg in "$@"; do
