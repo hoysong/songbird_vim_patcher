@@ -46,6 +46,20 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 앱 서랍에 등록되어도 앱서랍을 통해 실행하는 경우 실행이 잘 되지 않고 있습니다.
 만약 바로 사용을 해야한다면 ~/obsidian/ 디렉토리의 appimg를 수동으로 실행하세요.
 
+# For 42 GYEONGSAN Cluster PC
++ Install
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/INSTALL.sh)" && source ~/.zshrc
+```
++ UnInstall
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/UNINSTALL.sh)" && source ~/.zshrc
+```
++ ReInstall
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/REINSTALL.sh)" && source ~/.zshrc
+```
+
 # 간단 사용법
 0. colorscheme를 변경하고 싶다면 ~/.vimrc파일을 확인하세요. 주석처리를 하거나 제거하여 colorscheme를 변경 가능합니다.
 
