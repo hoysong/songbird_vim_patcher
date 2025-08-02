@@ -80,7 +80,7 @@ echo ""
 
 echo -e "alias vim='cluster-vim'\n" >> ~/.zshrc
 echo "Alias for cluster-vim is set. You can use 'vim' to start cluster-vim."
-echo -e "export PATH=\"\$PATH:~/.local/bin\"\n" >> ~/.zshrc
+echo -e "export PATH=\"\$PATH:$HOME/.local/bin\"\n" >> ~/.zshrc
 echo "PATH is updated to include ~/.local/bin."
 
 
