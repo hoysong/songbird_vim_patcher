@@ -51,7 +51,6 @@ echo "
 if ! git clone https://github.com/hoysong/songbird_vim_patcher.git songbird_vim_patcher; then
 	exit 1
 fi
-cd songbird_vim_patcher && git checkout cluster_vim_path
 echo ""
 mkdir -p ~/.local/bin
 mv songbird_vim_patcher/docker songbird_vim_patcher/cluster_tools
