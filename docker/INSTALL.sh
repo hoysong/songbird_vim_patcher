@@ -80,11 +80,12 @@ echo ""
 
 echo -e "alias vim='cluster-vim'\n" >> ~/.zshrc
 echo "Alias for cluster-vim is set. You can use 'vim' to start cluster-vim."
-
+echo -e "export PATH=\"\$PATH:~/.local/bin\"\n" >> ~/.zshrc
+echo "PATH is updated to include ~/.local/bin.
 
 echo "Building and starting the Cluster Tools Docker container..."
 make -C ~/.local/share/cluster_tools fclean > /dev/null 2>&1
-if ! make -C ~/.local/share/cluster_tools 2>> >(tee error.log >&2); then
+if ! make -C ~/.local/share/cluster_tools; then
 	cleanup
 	failed_exit
 fi
