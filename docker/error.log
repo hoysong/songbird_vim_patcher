@@ -1,0 +1,23 @@
+Dockerfile:15
+
+--------------------
+
+  14 |     
+
+  15 | >>> RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
+
+  16 | >>> 	echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> /root/.zshrc && \
+
+  17 | >>> 	. /root/.nvm/nvm.sh && \
+
+  18 | >>> 	nvm install 16 && \
+
+  19 | >>> 	${NVM_DIR}/nvm.sh
+
+  20 |     
+
+--------------------
+
+failed to solve: process "/bin/zsh -c curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \techo 'export NVM_DIR=\"$([ -z \"${XDG_CONFIG_HOME-}\" ] && printf %s \"${HOME}/.nvm\" || printf %s \"${XDG_CONFIG_HOME}/nvm\")\"' >> /root/.zshrc && \t. /root/.nvm/nvm.sh && \tnvm install 16 && \t${NVM_DIR}/nvm.sh" did not complete successfully: exit code: 127
+
+make: *** [Makefile:4: build] 오류 1
