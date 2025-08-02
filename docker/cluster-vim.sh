@@ -12,7 +12,6 @@ if ! docker container ls | grep -q cluster-tools; then
 fi
 
 prefix="/root/.host_root"
-
 new_args=()
 for arg in "$@"; do
 	if [[ "$arg" == /* ]]; then
@@ -24,4 +23,4 @@ for arg in "$@"; do
 	fi
 done
 
-docker exec -it -w "${prefix}" cluster-tools zsh -c "\\. \${HOME}/.nvm/nvm.sh && vim ${new_args[*]}"
+docker exec -it -w "${prefix}/${PWD#/}" cluster-tools zsh -c "\\. \${HOME}/.nvm/nvm.sh && vim ${new_args[*]}"
