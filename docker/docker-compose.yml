@@ -1,7 +1,7 @@
 services:
-  cluster-tool:
+  cluster-tools:
     build: .
-    container_name: cluster-tool
+    container_name: cluster-tools
     volumes:
       - server:/root/home
     stdin_open: true

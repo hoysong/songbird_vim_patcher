@@ -2,12 +2,11 @@ all: build up
 
 build:
 	docker compose -f ./docker-compose.yml build
-
 up:
 	docker compose -f ./docker-compose.yml up -d
 
 go:
-	docker exec -it -w /root cluster-tool /bin/zsh
+	docker exec -it -w /root cluster-tools /bin/zsh
 
 down:
 	docker compose -f ./docker-compose.yml down
