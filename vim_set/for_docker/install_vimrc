@@ -1,0 +1,46 @@
+if has("syntax")
+  syntax on
+endif
+set autoindent
+set cindent
+set smartindent
+set ts=4
+set shiftwidth=4
+set hlsearch
+set nu
+set relativenumber
+set cursorline
+
+set list
+set listchars=tab:\ \ │
+" Enable copy to clipboard
+set clipboard=unnamed
+
+" === 터미널 관련 설정 (필요 여부에 따라 주석설정.) ===
+"set termwinsize=10x210 " vim 안에서 ':term' 명령을 통해 생성된 터미널의 크기입니다. (수직)x(수평)
+"autocmd VimEnter * below term  
+"autocmd VimEnter * wincmd k " 생성된 터미널에 있는 커서를 편집중인 파일로 이동합니다.
+
+set omnifunc=syntaxcomplete#Complete
+filetype plugin indent on    " required
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+
+" === vim-plug 플러그인 목록 ===
+call plug#begin('~/.vim/plugged')
+	" add airline design
+	Plug 'vim-airline/vim-airline'
+	Plug 'preservim/nerdtree'
+	Plug 'vim-syntastic/syntastic'
+	" 컬러스키마
+	Plug 'morhetz/gruvbox'
+	Plug 'dracula/vim', {'as': 'dracula'}
+	Plug 'lifepillar/vim-solarized8'
+
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+" coc.nvim 시작 시 경고 메시지 비활성화
+let g:coc_disable_startup_warning = 1
+let g:coc_global_extensions = ['coc-clangd']
