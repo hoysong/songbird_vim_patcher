@@ -1,0 +1,15 @@
+services:
+  cluster-vim:
+    build: .
+    container_name: cluster-vim
+    volumes:
+      - server:/root/home
+    stdin_open: true
+    tty:  true
+volumes:
+  server:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/seongkim/
