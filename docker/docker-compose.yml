@@ -1,7 +1,7 @@
 services:
-  cluster-vim:
+  cluster-tool:
     build: .
-    container_name: cluster-vim
+    container_name: cluster-tool
     volumes:
       - server:/root/home
     stdin_open: true
@@ -12,4 +12,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/seongkim/
+      device: /home/seongkim/work
