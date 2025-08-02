@@ -52,7 +52,7 @@ if ! git clone https://github.com/ausungju/songbird_vim_patcher.git songbird_vim
 	exit 1
 fi
 echo ""
-
+mkdir -p ~/.local/bin
 mv songbird_vim_patcher/docker songbird_vim_patcher/cluster_tools
 if ! mv songbird_vim_patcher/cluster_tools ~/.local/share/ 2> >(tee error.log >&2); then
 	cleanup
