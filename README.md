@@ -49,15 +49,15 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 # For 42 GYEONGSAN Cluster PC
 + Install
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/INSTALL.sh)" && source ~/.zshrc
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/INSTALL.sh)" && source ~/.zshrc
 ```
 + UnInstall
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/UNINSTALL.sh)" && source ~/.zshrc
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/UNINSTALL.sh)" && source ~/.zshrc
 ```
 + ReInstall
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/REINSTALL.sh)" && source ~/.zshrc
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)" && source ~/.zshrc
 ```
 
 # 간단 사용법
