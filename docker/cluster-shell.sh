@@ -12,4 +12,4 @@ fi
 
 SHELL_PATH="/root/home/${PWD#$HOME}"
 
-docker exec -it -w SHELL_PATH cluster-tools /bin/zsh
+docker exec -it -w $SHELL_PATH cluster-tools /bin/zsh

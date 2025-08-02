@@ -7,6 +7,7 @@ RUN apt-get update && \
 
 SHELL ["/bin/zsh", "-c"]
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+	sed -i 's#^PROMPT=.*#PROMPT="(cluster_shell) %(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) %{$fg[cyan]%}%c%{$reset_color%}"#' /root/.oh-my-zsh/themes/robbyrussell.zsh-theme && \
 	echo -e 'alias c=clear\n' >> /root/.zshrc
 
 ENV LC_ALL=C.UTF-8
