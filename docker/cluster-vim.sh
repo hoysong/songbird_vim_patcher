@@ -12,7 +12,7 @@ if ! docker container ls | grep -q cluster-tools; then
 fi
 
 
-prefix="/root/home/$(pwd | sed 's/\/home\/seongkim\///')/"
+prefix="/root/home/${PWD#$HOME}"
 new_args=()
 
 for arg in "$@"; do

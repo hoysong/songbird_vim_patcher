@@ -10,4 +10,6 @@ if ! docker container ls | grep -q cluster-tools; then
 	echo "done."
 fi
 
-docker exec -it -w /root cluster-tools /bin/zsh
+SHELL_PATH="/root/home/${PWD#$HOME}"
+
+docker exec -it -w SHELL_PATH cluster-tools /bin/zsh
