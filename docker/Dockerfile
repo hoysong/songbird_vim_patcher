@@ -29,7 +29,7 @@ RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubuserconte
 	vim -u ~/songbird_vim_patcher/vim_set/for_docker/install_vimrc -E -s +PlugInstall +qall && \
 	rm -rf ~/songbird_vim_patcher
 
-RUN mkdir -p /root/.host_root
+RUN mkdir -p /root/home
 
 RUN cd && rm -rf ~/songbird_vim_patcher
 

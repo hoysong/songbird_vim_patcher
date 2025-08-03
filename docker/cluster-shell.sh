@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if ! docker container ls | grep -q cluster-tools; then
 	echo "Cluster-tools is not running. Starting it now..."
@@ -10,6 +10,11 @@ if ! docker container ls | grep -q cluster-tools; then
 	echo "done."
 fi
 
-SHELL_PATH="/root/.host_root/${PWD#/}"
+if [[ $PWD != $HOME/* ]]; then
+	echo "Current directory '$PWD' is not in the home directory."
+	exit 1
+fi
+
+SHELL_PATH="/root/home${PWD#$HOME}"
 
 docker exec -it -w $SHELL_PATH cluster-tools /bin/zsh
