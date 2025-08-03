@@ -85,7 +85,7 @@ echo "PATH is updated to include ~/.local/bin."
 
 
 echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
-
+echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
 
 echo "Building and starting the Cluster Tools Docker container..."
 make -C ~/.local/share/cluster_tools fclean > /dev/null 2>&1

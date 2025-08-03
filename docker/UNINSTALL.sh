@@ -13,7 +13,6 @@ echo "
 make -C ~/.local/share/cluster_tools fclean > /dev/null 2>&1
 echo "Cluster Tools Docker container is stopped and removed."
 
-
 rm -rf ~/.local/share/cluster_tools > /dev/null 2>&1
 echo "Cluster-tools directory is removed from ~/.local/share/cluster_tools"
 

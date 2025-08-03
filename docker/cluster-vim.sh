@@ -11,18 +11,28 @@
 # 	echo "done."
 # fi
 
-prefix="/root/home"
 new_args=()
 
+if [[ $PWD == $HOME/goinfre* ]]; then
+	SHELL_PATH="/root/goinfre${PWD#/home/$USER/goinfre}"
+elif [[ $PWD == $HOME* ]]; then
+	SHELL_PATH="/root/home${PWD#$HOME}"
+else
+	echo "Current directory '$PWD' is not in the home directory."
+	exit 1
+fi
 
 for arg in "$@"; do
 	realpath=$(realpath "$arg")
-	if [[ "$realpath" == $HOME/* ]]; then
-		new_args+=("$prefix${realpath#$HOME}")
+	echo $realpath
+	if [[ "$realpath" == $HOME* ]]; then
+		new_args+=("/root/home${realpath#$HOME}")
+	elif [[ "$realpath" == /goinfre/$USER* ]]; then
+		new_args+=("/root/goinfre${realpath#/goinfre/$USER}")
 	else
 		echo "Argument '$arg' is not in the home directory."
 		exit 1
 	fi
 done
-
-docker exec -it -w "${prefix}${PWD#$HOME}" cluster-tools zsh -c "\\. \${HOME}/.nvm/nvm.sh && vim ${new_args[*]} "
+echo "${new_args[*]}"
+docker exec -it -w "$SHELL_PATH" cluster-tools zsh -c "\\. \${HOME}/.nvm/nvm.sh && vim ${new_args[*]} "

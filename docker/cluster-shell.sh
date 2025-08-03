@@ -10,11 +10,14 @@ if ! docker container ls | grep -q cluster-tools; then
 	echo "done."
 fi
 
-if [[ $PWD != $HOME/* ]]; then
+
+if [[ $PWD == $HOME/goinfre* ]]; then
+	SHELL_PATH="/root/goinfre${PWD#/home/$USER/goinfre}"
+elif [[ $PWD == $HOME* ]]; then
+	SHELL_PATH="/root/home${PWD#$HOME}"
+else
 	echo "Current directory '$PWD' is not in the home directory."
 	exit 1
 fi
-
-SHELL_PATH="/root/home${PWD#$HOME}"
 
 docker exec -it -w $SHELL_PATH cluster-tools /bin/zsh

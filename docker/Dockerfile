@@ -30,6 +30,7 @@ RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubuserconte
 	rm -rf ~/songbird_vim_patcher
 
 RUN mkdir -p /root/home
+RUN mkdir -p /root/goinfre
 
 RUN cd && rm -rf ~/songbird_vim_patcher
 

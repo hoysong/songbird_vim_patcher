@@ -4,6 +4,7 @@ services:
     container_name: cluster-tools
     volumes:
       - server:/root/home
+      - goinfre:/root/goinfre
     stdin_open: true
     tty:  true
 volumes:
@@ -13,3 +14,9 @@ volumes:
       type: none
       o: bind
       device: ${HOST_HOME}/
+  goinfre:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOST_GOINFRE}/
