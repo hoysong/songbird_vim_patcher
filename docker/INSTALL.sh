@@ -188,7 +188,6 @@ echo ""
 echo "You can now use the 'cluster-shell' command to access the Cluster Tools shell."
 echo "To use Vim with Cluster Tools, simply run 'vim' in your terminal."
 echo ""
-echo "If you need to reinstall Cluster Tools, run 'REINSTALL.sh'."
 echo "If you want to uninstall Cluster Tools, run 'UNINSTALL.sh'."
 
 rm -rf songbird_vim_patcher
