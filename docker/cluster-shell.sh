@@ -44,6 +44,8 @@ fi
 if [ "$mode" == "42gs" ]; then
 	if [[ $PWD == $HOME/goinfre* ]]; then
 		SHELL_PATH="/root/.goinfre${PWD#/home/$USER/goinfre}"
+	elif [[ $PWD == /goinfre/$USER* ]]; then
+		SHELL_PATH="/root/.goinfre${PWD#/goinfre/$USER}"
 	elif [[ $PWD == $HOME* ]]; then
 		SHELL_PATH="/root/.home${PWD#$HOME}"
 	else
