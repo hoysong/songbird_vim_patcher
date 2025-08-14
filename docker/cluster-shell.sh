@@ -28,7 +28,7 @@ if ! docker container ls | grep -q cluster-tools; then
 fi
 
 # check if terminator is used
-if [ "$(ps -o comm= -p $PPID)" != "terminator" ]; then
+if ! pstree -ps $$ | grep -q "terminator"; then
 	echo "To maintain terminal transparency in cluster_vim, you must run the terminal with terminator."
 fi
 

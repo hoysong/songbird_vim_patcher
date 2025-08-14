@@ -1,25 +1,15 @@
 #!/bin/bash
 
+CLEAN_UP=0
+CHECK_CLUSTER_VIM_ALIAS=0
+CHECK_HOME_LOCAL_BIN_EXPORT=0
+
 failed_exit() {
 
 	echo ""
 	echo "Failed to install Cluster Tools. Cleaned up the temporary files."
 	echo "check error.log for more details."
 	exit 1
-}
-
-CLEAN_UP=0
-
-named_volume()
-{
-	val="
-  $1:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: $2"
-	echo $val
 }
 
 cleanup() {
@@ -43,6 +33,14 @@ cleanup() {
 		make -C ~/.local/share/cluster_tools fclean > /dev/null 2>&1
 	fi
 
+	if [ $CHECK_CLUSTER_VIM_ALIAS -eq 1 ]; then
+		sed -i "/alias vim='cluster-vim'/d" ~/.zshrc > /dev/null 2>&1
+	fi
+	
+	if [ $CHECK_HOME_LOCAL_BIN_EXPORT -eq 1 ]; then
+		sed -i '/export PATH="$HOME\/.local\/bin:$PATH"/d' ~/.zshrc > /dev/null 2>&1
+	fi
+
 	failed_exit
 }
 
@@ -51,8 +49,8 @@ repo_clone()
 	if [ -d "songbird_vim_patcher" ]; then
 		echo "songbird_vim_patcher already exists."
 		echo -n "Do you want to continue after removal? [y/N]: "
-		read answer
-		if [ "$answer" != "${answer#[Yy]}" ]; then
+		read ANSWER
+		if [ "$ANSWER" != "${ANSWER#[Yy]}" ]; then
 			rm -rf songbird_vim_patcher
 		else
 			echo "Aborting installation."
@@ -74,8 +72,8 @@ move_dir()
 	if [ -d "$HOME/.local/share/cluster_tools" ]; then
 		echo "Cluster Tools directory already install."
 		echo -n "Do you want to continue after removal? [y/N]: "
-		read answer
-		if [ "$answer" != "${answer#[Yy]}" ]; then
+		read ANSWER
+		if [ "$ANSWER" != "${ANSWER#[Yy]}" ]; then
 			echo "Aborting installation."
 			exit 1
 		else
@@ -127,7 +125,7 @@ Mode Selection Required:
   [2] Root Mode - Administrator mode with full system access. Not recommended for use.
 
 Please choose your preferred mode (1 or 2):"
-read mode_choice
+read MODE_CHOICE
 
 # Not recommended for use
 repo_clone
@@ -140,15 +138,29 @@ CLEAN_UP=2
 link_tools ~/.local/share/cluster_tools/cluster-vim.sh ~/.local/bin/cluster-vim
 CLEAN_UP=3
 
+
 # Registering aliases and setting environment variables
-echo -e "alias vim='cluster-vim'\n" >> ~/.zshrc
-echo "Alias for cluster-vim is set. You can use 'vim' to start cluster-vim."
-echo -e "export PATH=\"\$PATH:$HOME/.local/bin\"\n" >> ~/.zshrc
-echo "PATH is updated to include ~/.local/bin."
+if ! grep -q "alias vim='cluster-vim'" ~/.zshrc; then
+	CHECK_CLUSTER_VIM_ALIAS=1
+	echo -e "alias vim='cluster-vim'\n" >> ~/.zshrc
+	echo "Alias for cluster-vim is set. You can use 'vim' to start cluster-vim."
+else
+	echo "Alias for cluster-vim already exists."
+fi
 
 
+if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' ~/.zshrc || ! grep -q 'export PATH="$PATH:$HOME/.local/bin"' ~/.zshrc || ! grep 'export PATH="$PATH:'$HOME'/.local/bin"' ~/.zshrc  || ! grep -q 'export PATH="'$HOME'/.local/bin:$PATH"' ~/.zshrc; then
+	CHECK_HOME_LOCAL_BIN_EXPORT=1
+	echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshrc
+	echo "PATH is updated to include ~/.local/bin"
+else
+	echo "PATH already includes ~/.local/bin"
+fi
+
+
+SET
 # Setting environment variables
-if [ "$mode_choice" == "2" ]; then
+if [ "$MODE_CHOICE" == "2" ]; then
 	echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
 	echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
 	cp ~/.local/share/cluster_tools/mount_42gs ~/.local/share/cluster_tools/docker-compose.yml
@@ -183,7 +195,7 @@ echo "If you want to uninstall Cluster Tools, run 'UNINSTALL.sh'."
 rm -rf songbird_vim_patcher
 
 echo -e "version: 0.4.0" >> ~/.local/share/cluster_tools/info
-if [ "$mode_choice" == "2" ]; then
+if [ "$MODE_CHOICE" == "2" ]; then
 	echo -e "mode: root" >> ~/.local/share/cluster_tools/info
 else
 	echo -e "mode: 42gs" >> ~/.local/share/cluster_tools/info
