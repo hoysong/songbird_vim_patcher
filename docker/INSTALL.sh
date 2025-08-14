@@ -74,10 +74,10 @@ move_dir()
 		echo -n "Do you want to continue after removal? [y/N]: "
 		read ANSWER
 		if [ "$ANSWER" != "${ANSWER#[Yy]}" ]; then
+			rm -rf ~/.local/share/cluster_tools
+		else
 			echo "Aborting installation."
 			exit 1
-		else
-			rm -rf ~/.local/share/cluster_tools
 		fi
 	fi
 	if ! mv songbird_vim_patcher/docker ~/.local/share/cluster_tools; then
