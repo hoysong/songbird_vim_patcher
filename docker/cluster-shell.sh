@@ -8,7 +8,7 @@ mode=$(cat ~/.local/share/cluster_tools/info | grep "mode" | cut -d " " -f 2)
 # Check for updates
 if [ "$version" != "$local_version" ]; then
 	echo "New version available: $version"
-	echo "You can update by running 'bash -c \"$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)\" && source ~/.zshrc'"
+	echo 'You can update by running "bash -c \"$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)\" && source ~/.zshrc"'
 fi
 
 # check if cluster-tools is running
@@ -16,12 +16,12 @@ if ! docker container ls | grep -q cluster-tools; then
 	echo "Cluster-tools is not running. Starting it now..."
 	if [ ! -d "~/.local/share/cluster_tools" ]; then
 		echo "Not installed Cluster-tools."
-		echo "Please run 'bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/INSTALL.sh)" && source ~/.zshrc' to install Cluster Tools."
+		echo 'Please run "bash -c \"$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/INSTALL.sh)\" && source ~/.zshrc" to install Cluster Tools.'
 		exit 1
 	fi
 	if ! make -C ~/.local/share/cluster_tools; then
 		echo "Failed to start Cluster-tools."
-		echo "Please run 'bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)" && source ~/.zshrc' to reinstall Cluster Tools."
+		echo 'Please run "bash -c \"$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)\" && source ~/.zshrc" to reinstall Cluster Tools.'
 		exit 1
 	fi
 	echo "done."

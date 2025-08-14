@@ -158,9 +158,9 @@ else
 fi
 
 
-SET
 # Setting environment variables
-if [ "$MODE_CHOICE" == "2" ]; then
+echo $MODE_CHOICE
+if [ "$MODE_CHOICE" == 1 ]; then
 	echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
 	echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
 	cp ~/.local/share/cluster_tools/mount_42gs ~/.local/share/cluster_tools/docker-compose.yml
