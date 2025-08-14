@@ -55,10 +55,6 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_pat
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/UNINSTALL.sh)" && source ~/.zshrc
 ```
-+ ReInstall
-```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/REINSTALL.sh)" && source ~/.zshrc
-```
 
 # 간단 사용법
 0. colorscheme를 변경하고 싶다면 ~/.vimrc파일을 확인하세요. 주석처리를 하거나 제거하여 colorscheme를 변경 가능합니다.
