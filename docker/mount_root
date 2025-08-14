@@ -1,0 +1,15 @@
+services:
+  cluster-tools:
+    build: .
+    container_name: cluster-tools
+    volumes:
+      - root:/root/.root
+    stdin_open: true
+    tty:  true
+volumes:
+  root:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOST_ROOT}/

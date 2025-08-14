@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 failed_exit() {
 
 	echo ""
@@ -10,6 +9,18 @@ failed_exit() {
 }
 
 CLEAN_UP=0
+
+named_volume()
+{
+	val="
+  $1:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $2"
+	echo $val
+}
 
 cleanup() {
 	if [ $CLEAN_UP -eq 0 ]; then
@@ -35,8 +46,68 @@ cleanup() {
 	failed_exit
 }
 
-trap cleanup INT
+repo_clone()
+{
+	if [ -d "songbird_vim_patcher" ]; then
+		echo "songbird_vim_patcher already exists."
+		echo -n "Do you want to continue after removal? [y/N]: "
+		read answer
+		if [ "$answer" != "${answer#[Yy]}" ]; then
+			rm -rf songbird_vim_patcher
+		else
+			echo "Aborting installation."
+			exit 1
+		fi
+	fi
+	echo "hoysong/songbird_vim_patcher.git cloning..."
+	if ! git clone https://github.com/hoysong/songbird_vim_patcher.git songbird_vim_patcher > /dev/null 2>&1; then
+		echo "Failed to clone songbird_vim_patcher repository."
+		echo "Aborting installation."
+		exit 1
+	fi
+	echo ""
+	return 0
+}
 
+move_dir()
+{
+	if [ -d "$HOME/.local/share/cluster_tools" ]; then
+		echo "Cluster Tools directory already install."
+		echo -n "Do you want to continue after removal? [y/N]: "
+		read answer
+		if [ "$answer" != "${answer#[Yy]}" ]; then
+			echo "Aborting installation."
+			exit 1
+		else
+			rm -rf ~/.local/share/cluster_tools
+		fi
+	fi
+	if ! mv songbird_vim_patcher/docker ~/.local/share/cluster_tools; then
+		echo "Failed to move songbird_vim_patcher/docker to ~/.local/share/cluster_tools"
+		cleanup
+		failed_exit
+	fi
+	echo "Cluster-tools directory is created at ~/.local/share/cluster_tools"
+	echo ""
+	return 0
+}
+
+link_tools()
+{
+	if [ -e $2 ]; then
+		rm -f $2
+	fi
+	if ! ln $1 $2; then
+		echo "Failed to link $1 to $2"
+		cleanup
+		failed_exit
+	fi
+	echo "Cluster-vim command is linked to $2"
+	echo ""
+	return 0
+}
+
+trap cleanup INT
 
 echo "
    _____ _           _                         _           
@@ -48,51 +119,55 @@ echo "
                                                  install.sh
 "
 
-if ! git clone https://github.com/hoysong/songbird_vim_patcher.git songbird_vim_patcher; then
-	exit 1
-fi
-echo ""
-mkdir -p ~/.local/bin
-mv songbird_vim_patcher/docker songbird_vim_patcher/cluster_tools
-if ! mv songbird_vim_patcher/cluster_tools ~/.local/share/ 2> >(tee error.log >&2); then
-	cleanup
-	failed_exit
-fi
+# Check if the script is run as root
+echo -n "
+Mode Selection Required:
+
+  [1] 42GS Mode - 42Gyeongsan cluster mode with restricted privileges [default]
+  [2] Root Mode - Administrator mode with full system access. Not recommended for use.
+
+Please choose your preferred mode (1 or 2):"
+read mode_choice
+
+# Not recommended for use
+repo_clone
+move_dir
 CLEAN_UP=1
-echo "Cluster-tools directory is created at ~/.local/share/cluster_tools"
-echo ""
 
-if ! link ~/.local/share/cluster_tools/cluster-shell.sh ~/.local/bin/cluster-shell 2>> >(tee error.log >&2); then
-	cleanup
-	failed_exit
-fi
+# Link cluster-tools
+link_tools ~/.local/share/cluster_tools/cluster-shell.sh ~/.local/bin/cluster-shell
 CLEAN_UP=2
-echo "Cluster-shell command is linked to ~/.local/bin/cluster-shell"
-echo ""
-
-if ! link ~/.local/share/cluster_tools/cluster-vim.sh ~/.local/bin/cluster-vim 2> >(tee error.log >&2); then
-    cleanup
-	failed_exit
-fi
+link_tools ~/.local/share/cluster_tools/cluster-vim.sh ~/.local/bin/cluster-vim
 CLEAN_UP=3
-echo "Cluster-vim command is linked to ~/.local/bin/cluster-vim"
-echo ""
 
+# Registering aliases and setting environment variables
 echo -e "alias vim='cluster-vim'\n" >> ~/.zshrc
 echo "Alias for cluster-vim is set. You can use 'vim' to start cluster-vim."
 echo -e "export PATH=\"\$PATH:$HOME/.local/bin\"\n" >> ~/.zshrc
 echo "PATH is updated to include ~/.local/bin."
 
 
-echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
-echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
+# Setting environment variables
+if [ "$mode_choice" == "2" ]; then
+	echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
+	echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
+	cp ~/.local/share/cluster_tools/mount_42gs ~/.local/share/cluster_tools/docker-compose.yml
+else
+	echo -e "HOST_ROOT=/" >> ~/.local/share/cluster_tools/.env
+	cp ~/.local/share/cluster_tools/mount_root ~/.local/share/cluster_tools/docker-compose.yml
+fi
+echo "Make sure to update the .env file with your local paths."
+echo "Make sure to update the docker-compose.yml file with your local paths."
 
+# Run Docker container
 echo "Building and starting the Cluster Tools Docker container..."
 make -C ~/.local/share/cluster_tools fclean > /dev/null 2>&1
 if ! make -C ~/.local/share/cluster_tools; then
 	cleanup
 	failed_exit
 fi
+
+# print success message
 echo ""
 echo "Cluster Tools is up and running!"
 echo ""
@@ -106,3 +181,10 @@ echo "If you need to reinstall Cluster Tools, run 'REINSTALL.sh'."
 echo "If you want to uninstall Cluster Tools, run 'UNINSTALL.sh'."
 
 rm -rf songbird_vim_patcher
+
+echo -e "version: 0.4.0" >> ~/.local/share/cluster_tools/info
+if [ "$mode_choice" == "2" ]; then
+	echo -e "mode: root" >> ~/.local/share/cluster_tools/info
+else
+	echo -e "mode: 42gs" >> ~/.local/share/cluster_tools/info
+fi

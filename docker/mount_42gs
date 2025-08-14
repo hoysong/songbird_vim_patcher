@@ -3,8 +3,8 @@ services:
     build: .
     container_name: cluster-tools
     volumes:
-      - server:/root/home
-      - goinfre:/root/goinfre
+      - home:/root/.home
+      - goinfre:/root/.goinfre
     stdin_open: true
     tty:  true
 volumes:

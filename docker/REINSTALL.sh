@@ -10,9 +10,9 @@ echo "
                                                reinstall.sh
 "
 
-curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/UNINSTALL.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/UNINSTALL.sh | bash
 
-if curl -fsSL https://raw.githubusercontent.com/ausungju/songbird_vim_patcher/main/docker/INSTALL.sh | bash; then
+if curl -fsSL https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/INSTALL.sh | bash; then
 	echo "Reinstallation successful!"
 else
 	echo "Reinstallation failed."

@@ -22,15 +22,16 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | b
 
 
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
-	git clone https://github.com/ausungju/songbird_vim_patcher.git ~/songbird_vim_patcher && \
+	git clone https://github.com/hoysong/songbird_vim_patcher.git ~/songbird_vim_patcher && \
 	cd ~/songbird_vim_patcher && \
 	git pull && \
 	cp ~/songbird_vim_patcher/vim_set/for_docker/main_vimrc ~/.vimrc && \
 	vim -u ~/songbird_vim_patcher/vim_set/for_docker/install_vimrc -E -s +PlugInstall +qall && \
 	rm -rf ~/songbird_vim_patcher
 
-RUN mkdir -p /root/home
-RUN mkdir -p /root/goinfre
+RUN mkdir -p /root/.root
+RUN mkdir -p /root/.home
+RUN mkdir -p /root/.goinfre
 
 RUN cd && rm -rf ~/songbird_vim_patcher
 
