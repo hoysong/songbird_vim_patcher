@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version=$(curl -s https://raw.githubusercontent.com/hoysong/songbird_vim_patcher/main/docker/version | grep '^version:' | awk '{print $2}')
-local_version=$(cat ~/.local/share/cluster_tools/info | grep "version" | cut -d " " -f 2)
+local_version=$(cat ~/.local/share/cluster_tools/version | grep "version" | cut -d " " -f 2)
 mode=$(cat ~/.local/share/cluster_tools/info | grep "mode" | cut -d " " -f 2)
 
 if [ "$version" != "$local_version" ]; then

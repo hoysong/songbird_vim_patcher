@@ -159,7 +159,6 @@ fi
 
 
 # Setting environment variables
-echo $MODE_CHOICE
 if [ "$MODE_CHOICE" == 1 ]; then
 	echo -e "HOST_HOME=$HOME" >> ~/.local/share/cluster_tools/.env
 	echo -e "HOST_GOINFRE=/goinfre/$USER" >> ~/.local/share/cluster_tools/.env
@@ -194,7 +193,6 @@ echo "If you want to uninstall Cluster Tools, run 'UNINSTALL.sh'."
 
 rm -rf songbird_vim_patcher
 
-echo -e "version: 0.4.0" >> ~/.local/share/cluster_tools/info
 if [ "$MODE_CHOICE" == "2" ]; then
 	echo -e "mode: root" >> ~/.local/share/cluster_tools/info
 else
