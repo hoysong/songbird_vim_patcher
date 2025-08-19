@@ -1,5 +1,4 @@
 ![vim](https://github.com/user-attachments/assets/62b62f6e-6e4a-410b-a075-3223c27a8fa7)
-!!현재 클러스터 내의 환경이 변경되며 vim 설치 스크립트에서 nodejs관련 문제가 발생하고 있습니다. vim 설치 스크립트는 클러스터에서 동작하지 않습니다.
 # 도움받은 레포지토리 및 자료
 현재 vim 플러그인 자동설치만 있습니다.
 + [cocnvim](https://github.com/neoclide/coc.nvim)
@@ -37,6 +36,7 @@ if you don't want to overwrite your original vimrc, backup somewhere.
 당신이 이미 사용중인 vim에 만족한다면 이 쉘 스크립드를 사용할 필요가 없습니다.
 
 # how to install
+해당 방식은 42경산 클러스터 환경에서 동작하지 않습니다.
 + bash patch.sh 를 통해 스크립트를 실행합니다.
 + 설치를 진행하는 동안 키보드에서 손을 내려주세요.
 + 새로운 터미널들이 열릴 것이지만 당황하지 마세요.
